@@ -1,0 +1,32 @@
+name: Deploy to FTP Server
+
+on:
+  push:
+    branches:
+      - main # Adjust to your branch name
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Deploy via FTP
+      - name: 📂 Sync files to FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        with:
+          server: ftp.scrapinggenius.com
+          username: USER_NAME
+          password: PASSWORD
+
+          # port: ${{ secrets.FTP_PORT }} # port 21
+          local-dir: out/ #"dist" # Vite's default build output folder
+          server-dir: / # Replace with your FTP directory path
+          exclude: |
+            **/.git**
+            **/blog/**
+            **/blog**
