@@ -19,13 +19,11 @@ jobs:
       - name: 📂 Sync files to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-          server: ftp.scrapinggenius.com
-          username: USER_NAME
-          password: PASSWORD
-
-          # port: ${{ secrets.FTP_PORT }} # port 21
-          local-dir: out/ #"dist" # Vite's default build output folder
-          server-dir: / # Replace with your FTP directory path
+          server: ftp.ititans.com
+          username: zainjaved@ititans.com
+          password: ${{ secrets.FTP_SECRET }}
+          local-dir: ./ # This is the directory containing your code
+          server-dir: ititans.com/public_html/ # This is the target directory on the FTP Server
           exclude: |
             **/.git**
             **/blog/**
